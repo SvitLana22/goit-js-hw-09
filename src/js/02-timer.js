@@ -5,10 +5,10 @@ import Notiflix from 'notiflix';
 const refs = {
   dataTimeChoice: document.querySelector('#datetime-picker'),
   startBtn: document.querySelector('[data-start]'),
-  daysRef: document.querySelector('[data-days]'),
-  hoursRef: document.querySelector('[data-hours]'),
-  minutesRef: document.querySelector('[data-minutes]'),
-  secondsRef: document.querySelector('[data-seconds]'),
+  days: document.querySelector('[data-days]'),
+  hours: document.querySelector('[data-hours]'),
+  minutes: document.querySelector('[data-minutes]'),
+  seconds: document.querySelector('[data-seconds]'),
 };
 
 let userDate = null;
@@ -65,19 +65,19 @@ function onStartBtn() {
 }
 
 function updateDate() {
-  const nowDate = new Date();
+  const newDate = new Date();
   const selectedDate = new Date(refs.dataTimeChoice.value);
-  const deltaDate = nowDate - selectedDate;
+  const deltaDate = selectedDate - newDate;
   if (deltaDate < 0) {
     return;
   } else {
-    const { days, hours, minutes, seconds } = convertMs(deltaTime);
+    const { days, hours, minutes, seconds } = convertMs(deltaDate);
     refs.days.textContent = `${days}`;
     refs.hours.textContent = `${hours}`;
     refs.minutes.textContent = `${minutes}`;
     refs.seconds.textContent = `${seconds}`;
   }
 }
-
 flatpickr(refs.dataTimeChoice, options);
+
 // console.log(fp);
